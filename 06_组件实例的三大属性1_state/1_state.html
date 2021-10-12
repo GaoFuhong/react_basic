@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class Weather extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {isHot: false, wind: "微风"};
+                this.changeWeather = this.changeWeather.bind(this);
+            }
+            render() {
+                const {isHot, wind} = this.state;
+                return <h2 onClick={this.changeWeather}>今天天气很{isHot ? "炎热" : "凉爽"}, {wind}</h2>
+            }
+            changeWeather() {
+                const isHot = this.state.isHot;
+                // 注意：状态必须通过setSate进行更新，且更新是一种合并，不是替换。
+                this.setState({isHot: !isHot});
+            }   
+        }
+        ReactDOM.render(<Weather />, document.getElementById("test"));
+        
+    </script>
+</body>
+</html>
